@@ -1,0 +1,30 @@
+#Assignment 4: RSA Encryption in Python
+
+pip install pycryptodome
+from Crypto.PublicKey import RSA
+from Crypto.Cipher import PKCS1_OAEP
+
+# Step 1: Generate RSA Key Pair (Public + Private)
+key = RSA.generate(2048)
+private_key = key.export_key()
+public_key = key.publickey().export_key()
+
+# Display keys (for demo)
+print("Public Key:\n", public_key.decode())
+print("Private Key:\n", private_key.decode())
+
+# Step 2: Create cipher objects
+public_key_obj = RSA.import_key(public_key)
+private_key_obj = RSA.import_key(private_key)
+
+cipher_encrypt = PKCS1_OAEP.new(public_key_obj)
+cipher_decrypt = PKCS1_OAEP.new(private_key_obj)
+
+# Step 3: Input message and encrypt
+message = input("Enter message to encrypt: ")
+encrypted_msg = cipher_encrypt.encrypt(message.encode())
+print("\nEncrypted message (hex):", encrypted_msg.hex())
+
+# Step 4: Decrypt the message
+decrypted_msg = cipher_decrypt.decrypt(encrypted_msg)
+print("Decrypted message:", decrypted_msg.decode())
