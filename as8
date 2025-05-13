@@ -1,0 +1,23 @@
+# Assignment 8: Threat Intelligence Research
+
+#shodan
+apache country:"IN" port:80
+
+#google dork
+inurl:/phpmyadmin/    192.168.X.X/phpmyadmin/
+filetype:pdf site:gov.in
+
+##  Tool 1: Shodan
+
+**Query:** apache country:"IN"  
+**IP Found:** 123.45.67.89  
+**Details:** Apache 2.4.29 running on port 80  
+**Risk:** Version is outdated (CVE-2018-1312)
+
+---
+
+## Tool 2: Google Dorking
+
+**Dork:** filetype:pdf site:gov.in  
+**Result:** Exposed PDFs on a government site  
+**Observation:** PDFs may contain sensitive internal contact info
