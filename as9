@@ -1,0 +1,22 @@
+#Assignment 9: Anti-Forensic Tools
+
+Download: https://www.ccleaner.com/ccleaner/download
+
+CCleaner	- System Cleaner -	Windows -	Deletes temp files, browser history, logs
+Open CCleaner
+Run Custom Clean
+Check options for:
+Browser history
+System temporary files
+Recent document lists
+Click “Run Cleaner”
+Observe: files wiped, space freed
+
+
+PART B: Chkrootkit
+A Linux command-line tool to detect rootkits — malware designed to give attackers root access while hiding their presence.
+
+sudo apt update
+sudo apt install chkrootkit
+
+sudo chkrootkit
