@@ -1,0 +1,72 @@
+
+###  **1. Start Burp Suite**
+
+* Open **Burp Suite Community Edition**
+* Go to `Proxy` tab → Click **Intercept is ON** to start listening
+* Optionally, open **Burp's embedded browser** or configure Firefox to use proxy:
+
+  * Proxy: `127.0.0.1`, Port: `8080`
+
+---
+
+###  **2. Open Your Vulnerable Web App (DVWA or bWAPP)**
+
+* URL: `http://localhost/dvwa/` or `http://127.0.0.1`
+* Login using:
+
+  * Username: `admin`
+  * Password: `password`
+* Set **Security level to LOW** from the DVWA security tab
+
+---
+
+###  **3. Intercept a Request**
+
+* Navigate to a **vulnerable input page**:
+
+  * e.g., **DVWA → Login**, **Command Injection**, or **XSS**
+* Submit a form with dummy input
+* In Burp → **Proxy** tab → you'll see the request captured
+* Right-click → **Send to Repeater**
+
+---
+
+###  **4. Perform Manual Testing in Repeater**
+
+#### SQL Injection Test:
+
+* Go to the login page → enter:
+
+  * Username: `' OR 1=1--`
+  * Password: `abc`
+* In Repeater → click "Send"
+* Look for successful login response in the Response tab
+
+####  XSS Test:
+
+* Go to XSS input page
+* Try input like: `<script>alert(1)</script>`
+* Click “Send” → check response/body if script is reflected
+
+---
+
+###  **5. Take Screenshots (if allowed)**
+
+* Proxy tab with intercepted request
+* Repeater tab with payloads
+* Browser showing XSS `alert(1)` popup (if it works)
+
+
+Steps Followed:
+1. Opened DVWA in browser and Burp Suite for intercepting traffic
+2. Performed login request capture and tested SQL injection using `' OR '1'='1`
+3. Navigated to XSS page and injected `<script>alert(1)</script>`
+4. Observed alert popup confirming XSS
+
+Vulnerabilities Found:
+1. SQL Injection on Login page
+2. Reflected XSS on input page
+
+
+> “I used Burp Suite to intercept a login form, then tested it using a SQL injection payload (`' OR 1=1--`). I also sent input like `<script>alert(1)</script>` to test for reflected XSS. The responses showed vulnerability to both, proving weak input validation.”
+
